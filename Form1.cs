@@ -14,9 +14,12 @@ namespace TestHlynovBank
         public static DataTable DataToSave { get; set; } = new DataTable(); //Таблица для записи логов
         public void SampleFolderCheck() //Метод для получения списка шаблонов 
         {
-            foreach(string path in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\samples"))
+            foreach(string path in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\samples", "*.dotx"))
             {
-                Samples.Rows.Add(Path.GetFileNameWithoutExtension(path), path);
+                if (!path.Contains("~$")) //Не получать временные файлы открытого документа
+                {
+                    Samples.Rows.Add(Path.GetFileNameWithoutExtension(path), path);
+                }
             }
 
         }
