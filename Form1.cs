@@ -9,10 +9,10 @@ namespace TestHlynovBank
 {
     public partial class Form1 : Form
     {
-        public static DataTable Bookmarks { get; set; } = new DataTable();
-        public static DataTable Samples { get; set; } = new DataTable();
-        public static DataTable DataToSave { get; set; } = new DataTable();
-        public void SampleFolderCheck()
+        public static DataTable Bookmarks { get; set; } = new DataTable(); //Таблица с закладками и заполняемыми данными
+        public static DataTable Samples { get; set; } = new DataTable(); //Таблица с названиями и путями шаблонов
+        public static DataTable DataToSave { get; set; } = new DataTable(); //Таблица для записи логов
+        public void SampleFolderCheck() //Метод для получения списка шаблонов 
         {
             foreach(string path in Directory.GetFiles(Directory.GetCurrentDirectory() + @"\samples"))
             {
@@ -20,7 +20,7 @@ namespace TestHlynovBank
             }
 
         }
-        public void SaveData()
+        public void SaveData() //Метод для сохранения логов 
         {
             string DataPath = Directory.GetCurrentDirectory() + $"\\data\\{Samples.Rows[ComboBox1.SelectedIndex]["Name"].ToString()}.json";
             foreach (DataRow fd in Bookmarks.Rows)
@@ -74,12 +74,12 @@ namespace TestHlynovBank
             ComboBox1.ValueMember = "Name";
 
         }
-        class WordSample 
+        class WordSample //Класс работы с шаблоном
         {
-            public static Word._Application oWord;
-            public static Word._Document oDoc;
-            public static bool isWordOpen = false;
-            public static DataTable LoadSample(string SamplePath)
+            public static Word._Application oWord; //Процесс Word
+            public static Word._Document oDoc; //Документ Word
+            public static bool isWordOpen = false; //Переменная для закрытия процесса при перевыборе шаблона
+            public static DataTable LoadSample(string SamplePath) //Метод для получения списка закладок выбранного шаблона 
             {
                 CloseWord();
                 isWordOpen = true;
@@ -97,7 +97,7 @@ namespace TestHlynovBank
                 }
                 return Bookmarks;
             }
-            public static void FillingSample()
+            public static void FillingSample() //Метод заполнения шаблона занесенными данными 
             {
                 oWord.Visible = false;
                 foreach (DataRow fd in Bookmarks.Rows)
@@ -107,16 +107,16 @@ namespace TestHlynovBank
                 }
                 oWord.Visible = true;
             }
-            public static void CloseWord()
+            public static void CloseWord() //Метод закрытия процесса Word 
             {
                 if (isWordOpen)
                 {
-                    oDoc.Close();
-                    oWord.Quit();
+                    oDoc.Close(); //Закрытие документа
+                    oWord.Quit(); //Закрытие процесса
                 }
             }
 
-        }
+        } 
 
         private void EnterButton_Click(object sender, EventArgs e)
         {
