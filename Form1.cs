@@ -28,6 +28,8 @@ namespace TestHlynovBank
                 DataToSave.Columns.Add(fd["Закладка"].ToString());
                 DataToSave.Rows[0][fd["Закладка"].ToString()] = fd["Текст"].ToString();
             }
+            DataToSave.Columns.Add("Date"); //Занесение времени
+            DataToSave.Rows[0]["Date"] = DateTime.Now;
 
             if (File.Exists(DataPath)) //Если есть данные записаные ранее 
             {
