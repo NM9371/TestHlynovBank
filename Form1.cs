@@ -131,7 +131,7 @@ namespace TestHlynovBank
             Application.Exit();
         }
 
-        private void Form1_Closing(object sender, EventArgs e)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             WordSample.CloseWord();
         }
@@ -144,5 +144,6 @@ namespace TestHlynovBank
             grid.Visible = true;
             EnterButton.Visible = true;
         }
+
     }
 }

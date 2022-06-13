@@ -92,6 +92,7 @@
             this.Controls.Add(this.EnterButton);
             this.Name = "Form1";
             this.Text = "Заполнение шаблона";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
